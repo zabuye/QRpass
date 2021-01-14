@@ -14,7 +14,15 @@
 <body>
 <div id="wrapper">
   <header id="wrapper">
-    <div id="logo"><img src="{% static 'logo.jpg' %}" width="64" height="64" alt=""/></div>
+    <div id="logo"><img src="{% static 'logo.jpg' %}" width="64" height="64" alt=""/>
+      <span style="float: right;">
+        {% if user.is_authenticated %}
+          Hello, {{ user.username }}. <a href="{% url 'logout' %}?next=/">Log out</a>.
+        {% else %}
+          Not logged in. <a href="{% url 'login' %}">Log in</a>
+        {% endif %}
+      </span>
+    </div>
     <div id="topbanner"><img src="{% static 'pngwave.png' %}" width="800" height="200" alt=""/><div>
   </header>
   <aside id="leftsidebar">
@@ -25,6 +33,7 @@
         {% endblock sidenav %}
         <li><a href="/contact">Contact Us</a></li>
         <li><a href="/quote/">Get a Quote</a></li>
+        <li><a href="/quote/show">Show Quotes</a></li>
       </ul>
     </nav>
   </aside>
